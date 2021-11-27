@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snippets>
+    <snippet group="C++" trigger="gobject_final_decl" id="" complement="" removed="false" modified="false">#include &lt;glib-object.h&gt;
+
+// Final type decl: $FooBar$, $foo$_$bar$, $FOO$_TYPE_$BAR$
+
+G_BEGIN_DECLS
+
+#define $FOO$_TYPE_$BAR$ ($foo$_$bar$_get_type())
+
+G_DECLARE_FINAL_TYPE ($FooBar$, $foo$_$bar$, $FOO$, $BAR$, GObject)
+
+$FooBar$ *$foo$_$bar$_new (void);
+
+G_END_DECLS
+</snippet>
+    <snippet group="C++" trigger="gobject_final_def" id="" complement="" removed="false" modified="false">// Final type def: $FooBar$, $foo$_$bar$, $FOO$_TYPE_$BAR$
+#include &quot;$foo$-$bar$.h&quot;
+
+struct _$FooBar$
+{
+  GObject parent_instance;
+};
+
+G_DEFINE_FINAL_TYPE ($FooBar$, $foo$_$bar$, G_TYPE_OBJECT)
+
+enum {
+  PROP_0,
+  N_PROPS
+};
+
+static GParamSpec *properties [N_PROPS];
+
+$FooBar$ *
+$foo$_$bar$_new (void)
+{
+  return g_object_new ($FOO$_TYPE_$BAR$, NULL);
+}
+
+static void
+$foo$_$bar$_finalize (GObject *object)
+{
+  $FooBar$ *self = ($FooBar$ *)object;
+
+  G_OBJECT_CLASS ($foo$_$bar$_parent_class)-&gt;finalize (object);
+}
+
+static void
+$foo$_$bar$_get_property (GObject    *object,
+                      guint       prop_id,
+                      GValue     *value,
+                      GParamSpec *pspec)
+{
+  $FooBar$ *self = $FOO$_$BAR$ (object);
+
+  switch (prop_id)
+    {
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+$foo$_$bar$_set_property (GObject      *object,
+                      guint         prop_id,
+                      const GValue *value,
+                      GParamSpec   *pspec)
+{
+  $FooBar$ *self = $FOO$_$BAR$ (object);
+
+  switch (prop_id)
+    {
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+$foo$_$bar$_class_init ($FooBar$Class *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class-&gt;finalize = $foo$_$bar$_finalize;
+  object_class-&gt;get_property = $foo$_$bar$_get_property;
+  object_class-&gt;set_property = $foo$_$bar$_set_property;
+}
+
+static void
+$foo$_$bar$_init ($FooBar$ *self)
+{
+}
+</snippet>
+    <snippet group="C++" trigger="gobject_iface_decl" id="" complement="" removed="false" modified="false">#include &lt;glib-object.h&gt;
+
+// Interface decl: $FooBar$, $foo$_$bar$, $FOO$_TYPE_$BAR$
+
+G_BEGIN_DECLS
+
+#define $FOO$_TYPE_$BAR$ ($foo$_$bar$_get_type ())
+
+G_DECLARE_INTERFACE ($FooBar$, $foo$_$bar$, $FOO$, $BAR$, GObject)
+
+struct _$FooBar$Interface
+{
+  GTypeInterface parent;
+
+  void (*do_action) ($FooBar$ *self);
+  void (*do_something) ($FooBar$ *self, int i);
+};
+
+void $foo$_$bar$_do_action($FooBar$* self);
+void $foo$_$bar$_do_something($FooBar$* self, int i);
+
+G_END_DECLS
+
+</snippet>
+    <snippet group="C++" trigger="gobject_iface_def" id="" complement="" removed="false" modified="false">// Interface def: $FooBar$, $foo$_$bar$, $FOO$_TYPE_$BAR$
+#include &quot;$foo$-$bar$.h&quot;
+
+G_DEFINE_INTERFACE ($FooBar$, $foo$_$bar$, G_TYPE_OBJECT)
+
+static void
+$foo$_$bar$_default_init ($FooBar$Interface *iface)
+{
+}
+
+void
+$foo$_$bar$_do_action ($FooBar$ *self)
+{
+  g_return_if_fail ($FOO$_IS_$BAR$ (self));
+
+  $FOO$_$BAR$_GET_IFACE (self)-&gt;do_action (self);
+}
+
+void
+$foo$_$bar$_do_something ($FooBar$ *self, int i)
+{
+  g_return_if_fail ($FOO$_IS_$BAR$ (self));
+
+  $FOO$_$BAR$_GET_IFACE (self)-&gt;do_something (self, i);
+}
+</snippet>
+    <snippet group="C++" trigger="gobject_iface_impl" id="" complement="" removed="false" modified="false">// Final type def: $FooBar$, $foo$_$bar$, $FOO$_TYPE_$BAR$
+// Implements interface: $DooBaz$, $doo$_$baz$, $DOO$_TYPE_$BAZ$ 
+#include &quot;$foo$-$bar$.h&quot;
+#include &quot;$doo$-$baz$.h&quot;
+
+struct _$FooBar$
+{
+  GObject parent_instance;
+};
+
+static void $foo$_$bar$_$baz$_interface_init ($DooBaz$Interface *iface);
+
+G_DEFINE_TYPE_WITH_CODE ($FooBar$, $foo$_$bar$, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE ($DOO$_TYPE_$BAZ$,
+                                                $foo$_$bar$_$baz$_interface_init))
+
+enum {
+  PROP_0,
+  N_PROPS
+};
+
+static GParamSpec *properties [N_PROPS];
+
+$FooBar$ *
+$foo$_$bar$_new (void)
+{
+  return g_object_new ($FOO$_TYPE_$BAR$, NULL);
+}
+
+static void
+$foo$_$bar$_finalize (GObject *object)
+{
+  $FooBar$ *self = ($FooBar$ *)object;
+
+  G_OBJECT_CLASS ($foo$_$bar$_parent_class)-&gt;finalize (object);
+}
+
+static void
+$foo$_$bar$_get_property (GObject    *object,
+                      guint       prop_id,
+                      GValue     *value,
+                      GParamSpec *pspec)
+{
+  $FooBar$ *self = $FOO$_$BAR$ (object);
+
+  switch (prop_id)
+    {
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+$foo$_$bar$_set_property (GObject      *object,
+                      guint         prop_id,
+                      const GValue *value,
+                      GParamSpec   *pspec)
+{
+  $FooBar$ *self = $FOO$_$BAR$ (object);
+
+  switch (prop_id)
+    {
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+$foo$_$bar$_class_init ($FooBar$Class *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class-&gt;finalize = $foo$_$bar$_finalize;
+  object_class-&gt;get_property = $foo$_$bar$_get_property;
+  object_class-&gt;set_property = $foo$_$bar$_set_property;
+}
+
+
+
+static void
+$foo$_$bar$_init ($FooBar$ *self)
+{
+}
+
+// $DooBaz$ methods
+
+static void
+$foo$_$bar$_$baz$_do_something ($DooBaz$ *self, int i)
+{
+  $FooBar$* inst = $FOO$_$BAR$(self);
+  g_print (&quot;My implementation of $baz$ interface method.&quot;);
+}
+
+static void
+$foo$_$bar$_$baz$_interface_init ($DooBaz$Interface *iface)
+{
+  iface-&gt;do_something = $foo$_$bar$_$baz$_do_something;
+}
+</snippet>
+    <snippet group="C++" trigger="objdecl" id="" complement="" removed="false" modified="false">typedef struct $name$_t $name$_t;
+
+extern $name$_t* $name$_create(void);
+extern void $name$_destroy($name$_t* obj);</snippet>
+    <snippet group="C++" trigger="objimpl" id="" complement="" removed="false" modified="false">struct $name$_t {
+
+};
+
+$name$_t* $name$_create(void) {
+    $name$_t* obj = malloc(sizeof *obj);
+    
+    return obj;
+}
+
+void $name$_destroy($name$_t* obj) {
+    free(obj);
+}</snippet>
+    <snippet group="C++" trigger="pvc" id="" complement="interface" removed="false" modified="false">class $name$
+{
+public:
+    virtual ~$name$() = default;
+    
+    virtual void foo(void) = 0;
+};</snippet>
+    <snippet group="C++" trigger="tde" id="" complement="" removed="false" modified="false">typedef enum $name$ {
+    $name:u$_FOO,
+    $name:u$_BAR,
+} $name$;</snippet>
+    <snippet group="C++" trigger="tds" id="" complement="" removed="false" modified="false">typedef struct $name$ {
+    
+} $name$;
+
+</snippet>
+    <snippet group="C++" trigger="try" id="cpp_trycatch" complement="and catch" removed="false" modified="true">try {
+    $$
+} catch (...) {
+}</snippet>
+</snippets>
